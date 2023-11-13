@@ -3,6 +3,7 @@ package unb.azul.hortencias.blog.feudal.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import unb.azul.hortencias.blog.feudal.dto.AccountDTO;
 import unb.azul.hortencias.blog.feudal.model.enumerator.RoleIndicator;
 
 import javax.persistence.*;
@@ -35,4 +36,12 @@ public class AccountEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "tp_role", nullable = false)
     private RoleIndicator role;
+
+   public AccountEntity(AccountDTO account) {
+        this.username = account.getUsername();
+        this.registration = account.getRegistration();
+        this.email = account.getEmail();
+        this.password = account.getPassword();
+        this.role = account.getRole();
+    }
 }

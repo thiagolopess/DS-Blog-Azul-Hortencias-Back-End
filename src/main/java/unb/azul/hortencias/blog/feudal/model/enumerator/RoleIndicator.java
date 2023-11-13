@@ -1,8 +1,10 @@
 package unb.azul.hortencias.blog.feudal.model.enumerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum RoleIndicator {
     CAVALEIRO("Cavaleiro"),
     DUQUE("Duque"),
@@ -11,7 +13,4 @@ public enum RoleIndicator {
 
     private final String role;
 
-    RoleIndicator(String role) {
-        this.role = role;
-    }
 }

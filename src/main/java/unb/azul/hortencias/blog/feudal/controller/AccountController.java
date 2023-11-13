@@ -3,9 +3,8 @@ package unb.azul.hortencias.blog.feudal.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import unb.azul.hortencias.blog.feudal.dto.AccountDTO;
 import unb.azul.hortencias.blog.feudal.model.AccountEntity;
 import unb.azul.hortencias.blog.feudal.service.AccountService;
 
@@ -24,5 +23,10 @@ public class AccountController {
         List<AccountEntity> accounts = accountService.getAllAccounts();
         HttpStatus status = accounts.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
         return new ResponseEntity<>(accountService.getAllAccounts(), status);
+    }
+
+    @PostMapping
+    public ResponseEntity<AccountEntity> createAccount(@RequestBody AccountDTO account) {
+        return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
     }
 }
