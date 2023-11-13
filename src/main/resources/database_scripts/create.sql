@@ -1,6 +1,22 @@
+-- DDL SCRIPT
+
 -- Data types
-CREATE TYPE tp_role AS ENUM ('CAVALEIRO', 'DUQUE', 'CONSELHEIRO', 'MONARCA');
-CREATE TYPE tp_forum AS ENUM ('LIVRE', 'ESTUDOS', 'PAINEL_ESCRIBAS', 'AVISOS');
+create type tp_role as enum (
+    'CAVALEIRO',
+    'DUQUE',
+    'CONSELHEIRO',
+    'MONARCA'
+);
+
+create type tp_forum as enum (
+    'LIVRE',
+    'ESTUDOS',
+    'PAINEL_ESCRIBAS',
+    'AVISOS'
+);
+
+create cast (varchar as tp_role) with inout as implicit;
+create cast (varchar as tp_forum) with inout as implicit;
 
 -- Tables
 create table TB_ACCOUNT (
