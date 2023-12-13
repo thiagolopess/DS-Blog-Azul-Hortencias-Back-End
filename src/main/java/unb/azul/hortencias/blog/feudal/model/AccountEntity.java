@@ -1,15 +1,14 @@
 package unb.azul.hortencias.blog.feudal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import unb.azul.hortencias.blog.feudal.dto.AccountDTO;
 import unb.azul.hortencias.blog.feudal.model.enumerator.RoleIndicator;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity
@@ -38,6 +37,7 @@ public class AccountEntity {
     @Column(name = "fiefdom", nullable = false, length = 30)
     private String fiefdom;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
@@ -45,12 +45,10 @@ public class AccountEntity {
     @Column(name = "tp_role", nullable = false)
     private RoleIndicator role;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private List<PostEntity> posts;
-
    public AccountEntity(AccountDTO account) {
         this.username = account.getUsername();
         this.registration = account.getRegistration();
+        this.fiefdom = account.getFiefdom();
         this.email = account.getEmail();
         this.password = account.getPassword();
         this.role = account.getRole();

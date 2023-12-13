@@ -12,6 +12,7 @@ import unb.azul.hortencias.blog.feudal.model.enumerator.RoleIndicator;
 public class AccountDTO {
     String username;
     String registration;
+    String fiefdom;
     String email;
     String password;
     RoleIndicator role;

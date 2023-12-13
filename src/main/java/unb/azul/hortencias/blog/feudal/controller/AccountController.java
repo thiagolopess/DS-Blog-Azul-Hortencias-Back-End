@@ -19,11 +19,23 @@ public class AccountController {
 
     @GetMapping
     public ResponseEntity<List<AccountEntity>> getAllAccounts() {
-
         List<AccountEntity> accounts = accountService.getAllAccounts();
+
         HttpStatus status = accounts.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
-        return new ResponseEntity<>(accountService.getAllAccounts(), status);
+        return new ResponseEntity<>(accounts, status);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountEntity> getAccountById(@PathVariable Integer id) {
+        AccountEntity account = accountService.getAccountById(id);
+
+        if (account == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
 
     @PostMapping
     public ResponseEntity<AccountEntity> createAccount(@RequestBody AccountDTO account) {

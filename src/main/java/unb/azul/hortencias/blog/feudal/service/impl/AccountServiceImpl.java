@@ -26,4 +26,9 @@ public class AccountServiceImpl implements AccountService {
         account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
         return accountRepository.save(new AccountEntity(account));
     }
+
+    @Override
+    public AccountEntity getAccountById(Integer id) {
+        return accountRepository.findById(id).orElse(null);
+    }
 }

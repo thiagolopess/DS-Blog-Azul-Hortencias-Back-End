@@ -9,4 +9,6 @@ public interface AccountService {
     List<AccountEntity> getAllAccounts();
 
     AccountEntity createAccount(AccountDTO account);
+
+    AccountEntity getAccountById(Integer id);
 }
