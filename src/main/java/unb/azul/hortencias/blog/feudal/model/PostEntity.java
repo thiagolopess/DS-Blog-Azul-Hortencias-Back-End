@@ -2,6 +2,7 @@ package unb.azul.hortencias.blog.feudal.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "tb_post", schema = "public")
 @Entity
@@ -20,4 +21,7 @@ public class PostEntity {
 
     @Column(name = "dh_created", nullable = false)
     private LocalDateTime date;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments;
 }

@@ -1,18 +1,23 @@
 package unb.azul.hortencias.blog.feudal.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import unb.azul.hortencias.blog.feudal.dto.AccountDTO;
 import unb.azul.hortencias.blog.feudal.model.enumerator.RoleIndicator;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
 @Table(name = "tb_account", schema = "public")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccountEntity {
 
     @Id
@@ -30,12 +35,18 @@ public class AccountEntity {
     @Column(name = "email", nullable = false, length = 50, unique = true)
     private String email;
 
+    @Column(name = "fiefdom", nullable = false, length = 30)
+    private String fiefdom;
+
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tp_role", nullable = false)
     private RoleIndicator role;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<PostEntity> posts;
 
    public AccountEntity(AccountDTO account) {
         this.username = account.getUsername();

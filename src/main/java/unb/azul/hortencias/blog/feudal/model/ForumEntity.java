@@ -5,6 +5,7 @@ import lombok.Setter;
 import unb.azul.hortencias.blog.feudal.model.enumerator.ForumIndicator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_forum", schema = "public")
@@ -20,4 +21,6 @@ public class ForumEntity {
     @Column(name = "type", nullable = false)
     private ForumIndicator type;
 
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<PostEntity> posts;
 }
