@@ -42,7 +42,6 @@ public class SpringFoxConfig {
                 .securitySchemes(List.of(apiKey()))
                 .securityContexts(List.of(securityContext()))
                 .pathMapping("/")
-                .useDefaultResponseMessages(false)
                 .directModelSubstitute(LocalDate.class, String.class)
                 .genericModelSubstitutes(ResponseEntity.class);
     }
