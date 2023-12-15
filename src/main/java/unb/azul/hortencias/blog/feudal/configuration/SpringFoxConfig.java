@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Configuration
-@EnableSwagger2
 public class SpringFoxConfig {
     private ApiKey apiKey() {
         return new ApiKey("JWT", "Authorization", "header");
