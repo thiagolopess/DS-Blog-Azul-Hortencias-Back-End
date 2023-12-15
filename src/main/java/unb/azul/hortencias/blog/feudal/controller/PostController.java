@@ -3,7 +3,9 @@ package unb.azul.hortencias.blog.feudal.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 import unb.azul.hortencias.blog.feudal.dto.PostDTO;
 import unb.azul.hortencias.blog.feudal.model.AccountEntity;
 import unb.azul.hortencias.blog.feudal.model.PostEntity;
@@ -25,9 +27,9 @@ public class PostController {
     private final AccountService accountService;
 
     @PostMapping
-    ResponseEntity<PostEntity> createPost(@RequestBody PostDTO post) {
+    ResponseEntity<PostEntity> createPost(@RequestBody PostDTO post, @ApiIgnore Authentication authentication) {
 
-        AccountEntity account = accountService.getAccountById(ID_USER);
+        AccountEntity account = accountService.getAccountByEmail(authentication.getName());
 
         try {
             return new ResponseEntity<>(service.createPost(post, account), HttpStatus.CREATED);

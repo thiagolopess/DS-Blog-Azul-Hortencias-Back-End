@@ -3,9 +3,13 @@ package unb.azul.hortencias.blog.feudal.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 import unb.azul.hortencias.blog.feudal.dto.CommentDTO;
+import unb.azul.hortencias.blog.feudal.model.AccountEntity;
 import unb.azul.hortencias.blog.feudal.model.CommentEntity;
+import unb.azul.hortencias.blog.feudal.service.AccountService;
 import unb.azul.hortencias.blog.feudal.service.CommentService;
 
 import java.util.List;
@@ -18,6 +22,8 @@ public class CommentController {
     private final Integer ID_USER = 2;
 
     private final CommentService commentService;
+
+    private final AccountService accountService;
 
     @GetMapping("/{id}")
     public ResponseEntity<CommentEntity> getCommentById(@PathVariable Integer id) {
@@ -53,9 +59,11 @@ public class CommentController {
     }
 
     @PostMapping("/{idPost}")
-    public ResponseEntity<CommentEntity> createComment(@RequestBody CommentDTO comment, @PathVariable Integer idPost) {
+    public ResponseEntity<CommentEntity> createComment(@RequestBody CommentDTO comment, @PathVariable Integer idPost, @ApiIgnore Authentication authentication) {
+        AccountEntity account = accountService.getAccountByEmail(authentication.getName());
+
         try {
-            CommentEntity commentEntity = commentService.createComment(comment, idPost, ID_USER);
+            CommentEntity commentEntity = commentService.createComment(comment, idPost, account.getId());
 
             return new ResponseEntity<>(commentEntity, HttpStatus.OK);
         } catch (Exception e) {

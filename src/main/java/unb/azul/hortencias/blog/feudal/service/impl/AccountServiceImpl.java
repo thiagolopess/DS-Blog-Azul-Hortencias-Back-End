@@ -31,4 +31,10 @@ public class AccountServiceImpl implements AccountService {
     public AccountEntity getAccountById(Integer id) {
         return accountRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public AccountEntity getAccountByEmail(String email) {
+        return accountRepository.findByEmail(email).orElse(null);
+    }
+
 }

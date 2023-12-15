@@ -11,4 +11,6 @@ public interface AccountService {
     AccountEntity createAccount(AccountDTO account);
 
     AccountEntity getAccountById(Integer id);
+
+    AccountEntity getAccountByEmail(String email);
 }
